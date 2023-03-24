@@ -1,3 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=fallback');
+
+html {
+  /** Colors */
+  --brand-color: #4E75F6;
+  --brand-color-400: #698af4;
+  --brand-color-400-reverse: #FFF;
+  --brand-color-reverse: #FFF;
+  --brand-color-hover: #355EE7;
+  --primary-color: #333;
+  --secondary-color: #404c5c;
+  --tertiary-color: #94a3b8;
+  --border-color-primary: #e2e8f0;
+  /***/
+
+}
+body {
+  background: #FFF;
+  /*background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: #FEF6EB;
+  --tw-gradient-to: rgb(254 246 235 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: #FFF;*/
+}
+p, ul, li, span, input, button {
+  font-family: "Inter";
+}
+
+.bg-blur {
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+}
+
+/** Theme colors */
+.bg-main, .bg-brand {
+  background-color: var(--brand-color);
+}
+.bg-brand-400 {
+  background-color: var(--brand-color-400);
+}
+.bg-main-hover:hover, .bg-brand-hover:hover {
+  background-color: var(--brand-color-hover);
+}
+.border-brand {
+  border-color: var(--brand-color);
+}
+.text-main, .text-brand {
+  color: var(--brand-color);
+}
+.text-brand-hover:hover {
+  color: var(--brand-color-hover);
+}
+.text-primary {
+  color: var(--primary-color);
+}
+.text-secondary {
+  color: var(--secondary-color);
+}
+.text-tertiary {
+  color: var(--tertiary-color);
+}
+.text-main-hover:hover {
+  color: var(--brand-color-hover);
+}
+.btn-main, .btn-brand {
+  cursor: pointer;
+  background: var(--brand-color);
+  color: var(--brand-color-reverse);
+}
+.btn-main:hover, .btn-brand:hover {
+  background-color: var(--brand-color-hover);
+}
+.btn-secondary {
+  cursor: pointer;
+  background: var(--brand-color-reverse);
+  color: var(--brand-color);
+  border: 1px solid var(--brand-color);
+}
+.btn-secondary:hover {
+  color: var(--brand-color-hover);
+  border: 1px solid var(--brand-color-hover);
+}
+.btn-brand-400 {
+  cursor: pointer;
+  background: var(--brand-color-400);
+  color: var(--brand-color-400-reverse);
+}
+.btn-brand-400:hover {
+  background: var(--brand-color);
+}
+
+/** Post details style */
+
+.article-content p, .article-content ul, .article-content li {
+  color: var(--secondary-color);
+}
+.article-content.text-white p {
+  color: #FFF !important;
+}
+.article-content a {
+  color: #08c;
+}
+.article-content a:hover {
+  text-decoration: underline;
+}
+.article-content h2 {
+  --tw-text-opacity: 1;
+  color: var(--primary-color);
+  font-family: Aspekta, sans-serif;
+  font-size: 1.875rem;
+  line-height: 1.333;
+  letter-spacing: -0.01em;
+  font-weight: 650;
+}
+.article-content pre {
+  background: #1e293b;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.article-content pre code {
+  color: #FFF;
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+code, code > * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+.article-content > code, .article-content > p > code, .article-content > ul > li > p > code, .article-content > ul > li > code {
+  color: #000;
+  font-size: 13px;
+  background: #e2e8f0;
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+.article-content > ul > li {
+  list-style-type: disc;
+  margin-left: 15px;
+  line-height: 1.65;
+  margin-bottom: 5px;
+}
+.article-content table {
+  border-spacing: 0 15px;
+}
+.article-content thead {
+  border-bottom: 2px solid var(--border-color-primary);
+  color: var(--primary-color);
+  text-align: left;
+}
+.article-content tbody tr {
+  border-bottom: 1px solid var(--border-color-primary);
+}
+.article-content td, .article-content th {
+   padding-top: 5px;
+   padding-bottom: 5px;
+   padding-right: 5px;
+}
+
+/** Minor utilities */
+.min-height-200 {
+  min-height: 200px !important;
+}
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -85,16 +255,6 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -104,4 +264,248 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/** Default styles */
+/* Typography */
+.h1 {
+    @apply text-5xl font-bold;
+}
+
+.h2 {
+    @apply text-2xl font-bold;
+}
+
+.h3 {
+    @apply text-3xl font-bold;
+}
+
+.h4 {
+    @apply text-2xl font-bold;
+}
+
+@screen md {
+    .h1 {
+        @apply text-6xl;
+    }
+
+    .h2 {
+        @apply text-5xl;
+    }
+}
+
+/* Buttons */
+.btn,
+.btn-sm {
+    @apply text-sm font-medium inline-flex items-center justify-center rounded-full leading-5 whitespace-nowrap transition duration-150 ease-in-out;
+}
+
+.btn {
+    @apply px-5 py-2.5;
+}
+
+.btn-sm {
+    @apply px-4 py-2;
+}
+
+/* Forms */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select,
+.form-checkbox,
+.form-radio {
+    @apply bg-transparent bg-gradient-to-tr from-slate-800/20 via-slate-800/50 to-slate-800/20 border border-slate-700 focus:bg-slate-800 focus:border-slate-600;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select,
+.form-checkbox {
+    @apply rounded;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select {
+    @apply text-sm px-3 py-1.5;
+}
+
+.form-input,
+.form-textarea {
+    @apply placeholder-slate-600;
+}
+
+.form-select {
+    @apply pr-10;
+}
+
+.form-checkbox,
+.form-radio {
+    @apply text-indigo-500 border-2 rounded-sm;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
+/** Range slider style */
+:root {
+    --range-thumb-size: 36px;
+}
+
+input[type=range] {
+    appearance: none;
+    background: #ccc;
+    border-radius: 3px;
+    height: 6px;
+    margin-top: (--range-thumb-size - 6px) * 0.5;
+    margin-bottom: (--range-thumb-size - 6px) * 0.5;
+    --thumb-size: #{--range-thumb-size};
+}
+
+input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #000;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 .5v7L12 4zM0 4l4 3.5v-7z' fill='%23FFF' fill-rule='nonzero'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    height: --range-thumb-size;
+    width: --range-thumb-size;
+}
+
+input[type=range]::-moz-range-thumb {
+    background-color: #000;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 .5v7L12 4zM0 4l4 3.5v-7z' fill='%23FFF' fill-rule='nonzero'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    height: --range-thumb-size;
+    width: --range-thumb-size;
+}
+
+input[type=range]::-ms-thumb {
+    background-color: #000;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 .5v7L12 4zM0 4l4 3.5v-7z' fill='%23FFF' fill-rule='nonzero'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    height: --range-thumb-size;
+    width: --range-thumb-size;
+}
+
+input[type=range]::-moz-focus-outer {
+    border: 0;
+}
+
+/** Toggle switch style */
+/* Switch element */
+.form-switch {
+    @apply relative select-none;
+    width: 44px;
+}
+
+.form-switch label {
+    @apply block overflow-hidden cursor-pointer h-6 rounded-full;
+}
+
+.form-switch label>span:first-child {
+    @apply absolute block rounded-full;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    left: 2px;
+    right: 50%;
+    transition: all .15s ease-out;
+}
+
+.form-switch input[type="checkbox"]:checked+label {
+    @apply bg-indigo-500;
+}
+
+.form-switch input[type="checkbox"]:checked+label>span:first-child {
+    left: 22px;
+}
+
+.form-switch input[type="checkbox"]:disabled+label {
+    @apply cursor-not-allowed bg-slate-100 border border-slate-200;
+}
+
+.form-switch input[type="checkbox"]:disabled+label>span:first-child {
+    @apply bg-slate-400;
+}
+
+/** Additional theme styles */
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select,
+.form-checkbox,
+.form-radio {
+    @apply focus:ring-0;
+}
+
+/* Hamburger button */
+.hamburger svg>*:nth-child(1),
+.hamburger svg>*:nth-child(2),
+.hamburger svg>*:nth-child(3) {
+    transform-origin: center;
+    transform: rotate(0deg);
+}
+
+.hamburger svg>*:nth-child(1) {
+    transition: y 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 0.1s ease-in;
+}
+
+.hamburger svg>*:nth-child(2) {
+    transition: transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger svg>*:nth-child(3) {
+    transition: y 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19), width 0.1s 0.25s ease-in;
+}
+
+.hamburger.active svg>*:nth-child(1) {
+    opacity: 0;
+    y: 11;
+    transform: rotate(225deg);
+    transition: y 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.1s 0.12s ease-out;
+}
+
+.hamburger.active svg>*:nth-child(2) {
+    transform: rotate(225deg);
+    transition: transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.hamburger.active svg>*:nth-child(3) {
+    y: 11;
+    transform: rotate(135deg);
+    transition: y 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1), width 0.1s ease-out;
 }
