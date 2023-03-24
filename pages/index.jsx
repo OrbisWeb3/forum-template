@@ -72,8 +72,8 @@ function Home({defaultPosts}) {
     <>
       <Head>
         {/** Title */}
-        <title key="title">Orbis Forum | Let's build web3 social together</title>
-        <meta property="og:title" content="Orbis Forum | Let's build web3 social together" key="og_title" />
+        <title key="title">Orbis Forum | Let&apos;s build web3 social together</title>
+        <meta property="og:title" content="Orbis Forum | Let&apos;s build web3 social together" key="og_title" />
 
         {/** Description */}
         <meta name="description" content="Discuss the future of Orbis and experience the power of Open Social on our Orbis Forum." key="description"></meta>
@@ -134,7 +134,7 @@ function Home({defaultPosts}) {
                               </>
                             :
                               <div className="w-full text-center bg-[#F9FAFB] rounded border border-slate-200 p-6">
-                                <p className="text-sm text-secondary">There aren't any posts shared here.</p>
+                                <p className="text-sm text-secondary">There aren&apos;t any posts shared here.</p>
                               </div>
                             }
                           </>

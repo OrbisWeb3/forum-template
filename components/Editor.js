@@ -354,7 +354,7 @@ const Editor = ({post}) => {
                     </>
                   :
                     <div className="w-full text-center bg-[#F9FAFB] rounded border border-slate-200 p-6">
-                      <p className="text-base text-secondary mb-2">You can't share a post in this category as it's restricted to certain rules that you do not meet.</p>
+                      <p className="text-base text-secondary mb-2">You can&apos;t share a post in this category as it&apos;s restricted to certain rules that you do not meet.</p>
                       <button className="btn-sm py-1.5 btn-brand" onClick={() => setAccessRulesModalVis(true)}>View rules</button>
                     </div>
                   }

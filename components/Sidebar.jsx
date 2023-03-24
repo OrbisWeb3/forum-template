@@ -75,7 +75,7 @@ const RecentDiscussions = () => {
           </>
         :
           <div className="w-full text-center bg-[#F9FAFB] rounded border border-slate-200 p-6">
-            <p className="text-sm text-secondary">There isn't any posts here yet.</p>
+            <p className="text-sm text-secondary">There isn&apos;t any posts here yet.</p>
           </div>
         }
       </ul>
@@ -111,9 +111,9 @@ return(
       <ul className="space-y-3">
         {(categories && categories.length > 0) ?
           <>
-            {categories.map((category) => {
+            {categories.map((category, key) => {
               return (
-                <li className="flex flex-row">
+                <li className="flex flex-row" key={key}>
                   <div style={{background: "#E9993E", width: 4, marginRight: 10}}></div>
                   <div className="flex flex-1 flex-wrap items-center justify-between w-full">
                     <div className="flex items-center mr-2">
@@ -126,7 +126,7 @@ return(
           </>
         :
           <div className="w-full text-center bg-[#F9FAFB] rounded border border-slate-200 p-6">
-            <p className="text-sm text-secondary">There isn't any category in this forum.</p>
+            <p className="text-sm text-secondary">There isn&apos;t any category in this forum.</p>
           </div>
         }
 

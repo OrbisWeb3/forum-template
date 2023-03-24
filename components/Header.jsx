@@ -162,21 +162,21 @@ const SearchBar = () => {
                   <>
                     {(posts && posts.length > 0) ?
                       <>
-                        {posts.map((post) => {
+                        {posts.map((post, key) => {
                           if(post.content.master) {
                             return (
-                              <Link className="text-secondary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" href={"/post/" + post.content.master}>· {post.content.title ? post.content.title : <>{post.content.body.substring(0,25)}...</>}</Link>
+                              <Link key={post.stream_id} className="text-secondary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" href={"/post/" + post.content.master}>· {post.content.title ? post.content.title : <>{post.content.body.substring(0,25)}...</>}</Link>
                             );
                           } else {
                             return (
-                              <Link className="text-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" href={"/post/" + post.stream_id}>{post.content.title ? post.content.title : <>{post.content.body.substring(0,25)}...</>}</Link>
+                              <Link key={post.stream_id} className="text-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" href={"/post/" + post.stream_id}>{post.content.title ? post.content.title : <>{post.content.body.substring(0,25)}...</>}</Link>
                             );
                           }
 
                         })}
                       </>
                     :
-                      <div className="w-full text-tertiary text-sm text-center p-3">There isn't any result for this query.</div>
+                      <div className="w-full text-tertiary text-sm text-center p-3">There isn&apos;t any result for this query.</div>
                     }
                   </>
                 }
