@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Logo, CommunityIcon, PanelRight, SearchIcon, MenuVerticalIcon, LoadingCircle } from "./Icons";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { useOrbis, User, UserPopup, Chat } from "@orbisclub/components";
+import Image from 'next/image';
 
 function Header() {
   const { orbis, user, setConnectModalVis } = useOrbis();
@@ -17,8 +18,9 @@ function Header() {
             {/* Site branding */}
             <div className="shrink-0 mr-4">
               {/* Logo container */}
-              <Link href="/" className="text-primary">
-                <Logo />
+              <Link href="/" className="text-primary flex items-center gap-2">
+                <Image src="/logo.png" alt="Web3 of Trust Logo" width={30} height={30} />
+                <span className='text-xl'>Web3 of Trust</span>
               </Link>
             </div>
 
@@ -28,12 +30,6 @@ function Header() {
               <ul className="flex grow justify-end flex-wrap items-center">
                 <li className="hidden md:flex">
                   <SearchBar />
-                </li>
-                <li>
-                  <Link className="text-sm font-medium hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                    href="/post/kjzl6cwe1jw14b9pin02aak0ot08wvnrhzf8buujkop28swyxnvtsjdye742jo6">
-                    Learn more
-                  </Link>
                 </li>
                 {/** Show connect button or user connected */}
                 {user ?

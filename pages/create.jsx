@@ -13,12 +13,12 @@ export default function Create() {
     <>
       <Head>
         {/** Title */}
-        <title key="title">Share a new post | Orbis Forum</title>
-        <meta property="og:title" content="Share a new post | Orbis Forum" key="og_title" />
+        <title key="title">Share a new post | Web3 of Trust Forum</title>
+        <meta property="og:title" content="Share a new post | Web3 of Trust Forum" key="og_title" />
 
         {/** Description */}
-        <meta name="description" content="Discuss the future of Orbis and experience the power of Open Social on our Orbis Forum." key="description"></meta>
-        <meta property="og:description" content="Discuss the future of Orbis and experience the power of Open Social on our Orbis Forum." key="og_description"/>
+        <meta name="description" content="Discuss the future of Orbis and experience the power of Open Social on our Web3 of Trust Forum." key="description"></meta>
+        <meta property="og:description" content="Discuss the future of Orbis and experience the power of Open Social on our Web3 of Trust Forum." key="og_description"/>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
