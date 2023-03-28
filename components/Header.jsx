@@ -188,6 +188,7 @@ const SearchBar = () => {
   )
 }
 
+/** Container for the community chat panel */
 const ChatPanel = ({hide}) => {
   const wrapperRef = useRef(null);
 
@@ -204,7 +205,7 @@ const ChatPanel = ({hide}) => {
               <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                 <div className="bg-main py-6 px-4 sm:px-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-medium text-white" id="slide-over-title">Discussion Feed Demo</h2>
+                    <h2 className="text-lg font-medium text-white" id="slide-over-title">Community Chat</h2>
                     <div className="ml-3 flex h-7 items-center">
                       <button type="button" className="rounded-md bg-transparent text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white" onClick={() => hide()}>
                         <span className="sr-only">Close panel</span>
@@ -215,7 +216,7 @@ const ChatPanel = ({hide}) => {
                     </div>
                   </div>
                   <div className="mt-1">
-                    <p className="text-sm text-[#F2F2F2]">This is a live demo of our discussion feed module. This example is gated to users active on Mainnet, Polygon, Optimism or Arbitrum. <Link href="/modules/discussion-feed" className="font-medium text-white hover:underline">Learn more</Link></p>
+                    <p className="text-sm text-[#F2F2F2]">Participate in dynamic conversations with other community members in real-time.</p>
                   </div>
                 </div>
                 <div className="relative flex-1 overflow-scoll">
