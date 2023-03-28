@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Logo, CommunityIcon, PanelRight, SearchIcon, MenuVerticalIcon, LoadingCircle } from "./Icons";
 import useOutsideClick from "../hooks/useOutsideClick";
-import { useOrbis, User, UserPopup } from "@orbisclub/components";
+import { useOrbis, User, UserPopup, Chat } from "@orbisclub/components";
 
 function Header() {
   const { orbis, user, setConnectModalVis } = useOrbis();
@@ -54,13 +54,12 @@ function Header() {
                   </li>
                 }
                 {/** Will open the discussion feed on the right */}
-                {/**
                 <li className="ml-3">
                   <div className="btn-sm btn-secondary w-full" onClick={() => setShowCommunityChat(true)}>
                     Community Chat <PanelRight style={{marginLeft: 5}} />
                   </div>
                 </li>
-                */}
+
               </ul>
             </nav>
           </div>
@@ -221,8 +220,9 @@ const ChatPanel = ({hide}) => {
                 </div>
                 <div className="relative flex-1 overflow-scoll">
                   <div className="absolute inset-0">
-                    <div className="" aria-hidden="true">
+                    <div className="h-full" aria-hidden="true">
                       {/** Chat feed */}
+                      <Chat context="kjzl6cwe1jw147040w6bj3nkvny3ax30q76ib5ytxo6298psrx1oawa3wmme2jx" />
                     </div>
                   </div>
                 </div>
