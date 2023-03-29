@@ -11,21 +11,16 @@ function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-center md:justify-between mb-4">
             <div className="shrink-0 mr-4">
               {/* Logo */}
-              <Link className="inline-flex group mb-8 md:mb-0 text-primary" href="/">
-                <Logo />
+              <Link className="inline-flex group mb-8 md:mb-0 font-primary" href="/">
+                <img className="h-8 w-auto" src="/logo.png" alt="Web3 of Trust" />
               </Link>
             </div>
             {/* Right links */}
             <div className="text-sm font-medium md:order-1 mb-2 md:mb-0">
               <ul className="inline-flex flex-wrap text-sm space-x-6">
                 <li>
-                  <Link className="text-slate-500 hover:underline" href="/post/kjzl6cwe1jw14b9pin02aak0ot08wvnrhzf8buujkop28swyxnvtsjdye742jo6">
-                    Learn more
-                  </Link>
-                </li>
-                <li>
-                  <Link className="text-slate-500 hover:underline" href="https://useorbis.com" target="_blank">
-                    Go to useorbis.com
+                  <Link className="text-slate-500 hover:underline" href="https://www.web3oftrust.app/" target="_blank">
+                    Web3 of Trust
                   </Link>
                 </li>
 
@@ -56,7 +51,7 @@ function Footer() {
             </ul>
 
             {/* Copyright */}
-            <div className="text-sm text-slate-600">Copyright © Orbis Labs. All rights reserved.</div>
+            <div className="text-sm text-slate-600">Copyright © Web3 of Trust. All rights reserved.</div>
           </div>
         </div>
       </div>

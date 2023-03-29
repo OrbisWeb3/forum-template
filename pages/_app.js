@@ -15,5 +15,11 @@ let orbis = new Orbis({
 });
 
 export default function App({ Component, pageProps }) {
-  return <OrbisProvider defaultOrbis={orbis}><Component {...pageProps} /></OrbisProvider>
+  return <OrbisProvider defaultOrbis={orbis}>
+    <div className='bg-emerald-700 p-2 text-center'>
+      <p className='font-sans-serif text-white text-xs'>
+        The Forum is in Alpha. Please report any bugs or issues on the <a target="_blank" href='https://github.com/web3-of-trust/forum/issues' className='text-emerald-100 underline'>Github issue</a> page.
+      </p>
+    </div>
+    <Component {...pageProps} /></OrbisProvider>
 }

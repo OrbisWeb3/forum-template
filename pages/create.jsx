@@ -26,7 +26,7 @@ export default function Create() {
           <div className="min-h-screen flex">
 
             {/*  Page content */}
-            <main className="grow overflow-hidden">
+            <main className="grow overflow-hidden font-primary">
               {/*  Site header */}
               <Header />
               <Hero title="Sharing a new post on our forum" description="You are about to share a new post in the forum. Make sure to read our rules before doing so." image />

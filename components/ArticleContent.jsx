@@ -36,14 +36,14 @@ export default function ArticleContent({post}) {
       <article className="mb-8 pr-6">
         {/* Post header */}
         <header>
-          <h1 className="h2 text-primary mb-4">{post.content.title}</h1>
+          <h1 className="h2 font-primary mb-4">{post.content.title}</h1>
 
           {/** Article Metadata */}
           <div className="flex items-center justify-between mt-4 mb-4">
             <div className="text-xs text-secondary flex flex-row items-center flex-wrap">
               {/* Post date & creator details */}
               <span className="text-brand">—</span> <ReactTimeAgo date={post.timestamp * 1000} locale="en-US"/> <span className="text-secondary mr-2 ml-2">·</span>
-              <span className="text-primary"><User hover={true} details={post.creator_details} /></span>
+              <span className="font-primary"><User hover={true} details={post.creator_details} /></span>
               <span className="text-secondary mr-2 ml-2">·</span>
 
               {/** Proof link to Cerscan */}

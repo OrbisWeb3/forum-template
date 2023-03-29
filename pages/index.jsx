@@ -24,7 +24,7 @@ function Home({defaultPosts}) {
     /** Load all categories / contexts under the global forum context */
     async function loadContexts() {
       let { data, error } = await orbis.api.from("orbis_contexts").select().eq('context', global.orbis_context).order('created_at', { ascending: false });
-      setCategories(data);
+      setCategories(data.reverse());
     }
   }, []);
 
@@ -91,7 +91,7 @@ function Home({defaultPosts}) {
 
               {/*  Page sections */}
               <Hero title="Welcome to the Web3 of Trust forum" description="Help build identity, authentication and access control systems for a new generation of decentralized applications.
-              " image={<HeroOrbisIcon />} />
+              " image={<img src='/logo-blue.png' className='w-32 h-auto' />} />
 
               {/* Page content */}
               <section>
