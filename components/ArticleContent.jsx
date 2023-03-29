@@ -33,7 +33,7 @@ export default function ArticleContent({post}) {
 
   return(
     <>
-      <article className="mb-8 pr-6">
+      <article className="w-full mb-8 pr-6">
         {/* Post header */}
         <header>
           <h1 className="h2 text-primary mb-4">{post.content.title}</h1>
