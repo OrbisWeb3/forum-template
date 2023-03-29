@@ -219,7 +219,7 @@ const ChatPanel = ({hide}) => {
                   <div className="absolute inset-0">
                     <div className="h-full" aria-hidden="true">
                       {/** Chat feed */}
-                      <Chat context="kjzl6cwe1jw147040w6bj3nkvny3ax30q76ib5ytxo6298psrx1oawa3wmme2jx" />
+                      <Chat context={global.orbis_chat_context} />
                     </div>
                   </div>
                 </div>
