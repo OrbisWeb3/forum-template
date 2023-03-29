@@ -14,13 +14,13 @@ export default function PostItem({post}) {
             <div>
               <div className="mb-2">
                 <h2 className="mb-1">
-                  <Link className="text-primary font-semibold hover:underline transition duration-150 ease-in-out" href={"/post/" + post.stream_id}>
+                  <Link className="font-primary font-semibold hover:underline transition duration-150 ease-in-out" href={"/post/" + post.stream_id}>
                     {post.content.title}
                   </Link>
                 </h2>
                 <p className="text-sm text-secondary">{post.content.body.substring(0,180)}..</p>
               </div>
-              <div className="flex items-center text-sm text-primary flex flex-row space-x-1.5">
+              <div className="flex items-center text-sm font-primary flex flex-row space-x-1.5">
                 <User details={post.creator_details} height={35} />
                 <UserBadge details={post.creator_details}  />
                 <span className="text-secondary">in</span>
@@ -32,7 +32,7 @@ export default function PostItem({post}) {
 
                 {/** Proof link to Cerscan */}
                 {post.stream_id &&
-                  <Link href={"https://cerscan.com/mainnet/stream/" + post.stream_id} target="_blank" className="hidden md:flex text-primary text-xs bg-white border border-gray-200 rounded-md py-1 px-2 font-medium flex flex-row items-center hover:underline"><ExternalLinkIcon style={{marginRight: 4}} />{shortAddress(post.stream_id, 12)}</Link>
+                  <Link href={"https://cerscan.com/mainnet/stream/" + post.stream_id} target="_blank" className="hidden md:flex font-primary text-xs bg-white border border-gray-200 rounded-md py-1 px-2 font-medium flex flex-row items-center hover:underline"><ExternalLinkIcon style={{marginRight: 4}} />{shortAddress(post.stream_id, 12)}</Link>
                 }
               </div>
             </div>

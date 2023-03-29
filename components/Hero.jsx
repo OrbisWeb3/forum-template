@@ -15,7 +15,7 @@ function Hero({ title, description, image }) {
             <div className="flex flex-row items-center">
               {/* Copy */}
               <div className="flex flex-col md:pr-32">
-                <h1 className="text-3xl font-bold text-primary pb-3">{title}</h1>
+                <h1 className="text-3xl font-bold font-primary pb-3">{title}</h1>
                 <p className="text-lg text-secondary">{description}</p>
               </div>
 

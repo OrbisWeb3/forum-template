@@ -24,7 +24,7 @@ function Home({defaultPosts}) {
     /** Load all categories / contexts under the global forum context */
     async function loadContexts() {
       let { data, error } = await orbis.api.from("orbis_contexts").select().eq('context', global.orbis_context).order('created_at', { ascending: false });
-      setCategories(data);
+      setCategories(data.reverse());
     }
   }, []);
 
@@ -72,16 +72,16 @@ function Home({defaultPosts}) {
     <>
       <Head>
         {/** Title */}
-        <title key="title">Orbis Forum | Let&apos;s build web3 social together</title>
-        <meta property="og:title" content="Orbis Forum | Let&apos;s build web3 social together" key="og_title" />
+        <title key="title">Web3 of Trust Forum | Let&apos;s build web3 social together</title>
+        <meta property="og:title" content="Web3 of Trust Forum | Let&apos;s build web3 social together" key="og_title" />
 
         {/** Description */}
-        <meta name="description" content="Discuss the future of Orbis and experience the power of Open Social on our Orbis Forum." key="description"></meta>
-        <meta property="og:description" content="Discuss the future of Orbis and experience the power of Open Social on our Orbis Forum." key="og_description"/>
+        <meta name="description" content="Discuss the future of Orbis and experience the power of Open Social on our Web3 of Trust Forum." key="description"></meta>
+        <meta property="og:description" content="Discuss the future of Orbis and experience the power of Open Social on our Web3 of Trust Forum." key="og_description"/>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
-        <div className="antialiased">
+        <div className="antialiased font-primary">
           <div className="min-h-screen flex">
 
             {/*  Page content */}
@@ -90,7 +90,8 @@ function Home({defaultPosts}) {
               <Header />
 
               {/*  Page sections */}
-              <Hero title="Welcome to the Orbis Forum!" description="Respectful and good-faith discussion should be the cornerstone of any decision-making process. In trying to enact change, please keep this principle in mind." image={<HeroOrbisIcon />} />
+              <Hero title="Welcome to the Web3 of Trust forum" description="Help build identity, authentication and access control systems for a new generation of decentralized applications.
+              " image={<img src='/logo-blue.png' className='w-32 h-auto' />} />
 
               {/* Page content */}
               <section>

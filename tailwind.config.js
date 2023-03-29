@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        primary: ['sans-serif'],
         inter: ['Inter', 'sans-serif']
       },
       fontSize: {

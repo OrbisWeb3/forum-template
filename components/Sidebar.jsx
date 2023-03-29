@@ -65,7 +65,7 @@ const RecentDiscussions = () => {
               return(
                 <li key={key}>
                   <h3 className="text-sm mb-1">
-                    <Link className="text-primary font-semibold hover:underline" href={"/post/" + post.stream_id}>{post.content.title}</Link>
+                    <Link className="font-primary font-semibold hover:underline" href={"/post/" + post.stream_id}>{post.content.title}</Link>
                   </h3>
                   <div className="text-xs text-secondary flex flex-row items-center space-x-1">
                     <span className="text-tertiary">Last activity</span> <span><ReactTimeAgo date={post.last_reply_timestamp ? post.last_reply_timestamp * 1000 : post.timestamp * 1000} locale="en-US"/></span>
@@ -118,7 +118,7 @@ return(
                   <div style={{background: "#E9993E", width: 4, marginRight: 10}}></div>
                   <div className="flex flex-1 flex-wrap items-center justify-between w-full">
                     <div className="flex items-center mr-2">
-                      <Link className="truncate text-sm text-primary font-semibold hover:underline" href="#0">{category.content.displayName}</Link>
+                      <Link className="truncate text-sm font-primary font-semibold hover:underline" href="#0">{category.content.displayName}</Link>
                     </div>
                   </div>
                 </li>

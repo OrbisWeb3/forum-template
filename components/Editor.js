@@ -401,14 +401,14 @@ const Categories = ({category, setCategory}) => {
       setLoading(true);
       let { data, error } = await orbis.api.from("orbis_contexts").select().eq('context', global.orbis_context).order('created_at', { ascending: false });
 
-      setCategories(data);
+      setCategories(data.reverse());
       setLoading(false);
     }
   }, []);
 
   return(
     <div className="flex flex-col mt-2 mb-4 items-center text-sm">
-      <span className="text-primary font-medium text-base">Which category do you want to share your post into?</span>
+      <span className="font-primary font-medium text-base">Which category do you want to share your post into?</span>
       <div className="flex flex-row flex-wrap space-x-2 mt-2">
         {categories.map((cat) => {
           return (

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Logo, CommunityIcon, PanelRight, SearchIcon, MenuVerticalIcon, LoadingCircle } from "./Icons";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { useOrbis, User, UserPopup, Chat } from "@orbisclub/components";
+import Image from 'next/image';
 
 function Header() {
   const { orbis, user, setConnectModalVis } = useOrbis();
@@ -17,29 +18,24 @@ function Header() {
             {/* Site branding */}
             <div className="shrink-0 mr-4">
               {/* Logo container */}
-              <Link href="/" className="text-primary">
-                <Logo />
+              <Link href="/" className="font-primary flex items-center gap-2">
+                <Image src="/logo.png" alt="Web3 of Trust Logo" width={30} height={30} />
+                <span className='text-xl font-primary'>Web3 of Trust</span>
               </Link>
             </div>
 
             {/* Desktop navigation */}
-            <nav className="flex grow text-primary">
+            <nav className="flex grow font-primary">
               {/* Desktop sign in links */}
               <ul className="flex grow justify-end flex-wrap items-center">
                 <li className="hidden md:flex">
                   <SearchBar />
                 </li>
-                <li>
-                  <Link className="text-sm font-medium hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                    href="/post/kjzl6cwe1jw14b9pin02aak0ot08wvnrhzf8buujkop28swyxnvtsjdye742jo6">
-                    Learn more
-                  </Link>
-                </li>
                 {/** Show connect button or user connected */}
                 {user ?
                   <li className="relative ml-3 mr-3">
                     <div className="text-sm font-medium flex flex-row items-center space-x-4 rounded hover:bg-slate-300/[.2] px-3 py-2 cursor-pointer" onClick={() => setShowUserMenu(true)}>
-                      <User details={user} height={30} />
+                      <User details={user} height={30} className="font-primary" />
                       <MenuVerticalIcon />
                     </div>
 
@@ -93,8 +89,8 @@ const UserMenuVertical = ({hide}) => {
     <>
       <div className="absolute top-[0px] right-[0px] py-10 z-50 w-[165px]">
         <div className="text-sm shadow-md bg-white border border-gray-200 p-3 rounded-md flex flex-col w-full space-y-1" ref={wrapperRef}>
-          <div className="text-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" onClick={() => setShowUserPopup(true)}>Update profile</div>
-          <div className="text-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" onClick={() => logout()}>Logout</div>
+          <div className="font-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" onClick={() => setShowUserPopup(true)}>Update profile</div>
+          <div className="font-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" onClick={() => logout()}>Logout</div>
 
           {showUserPopup &&
             <BackgroundWrapper hide={() => setShowUserPopup(false)}>
@@ -154,7 +150,7 @@ const SearchBar = () => {
             <div className="absolute top-[32px] right-[0px] z-50 w-[300px] ">
               <div className="text-sm shadow-md bg-white border border-gray-200 p-2 rounded-md flex flex-col w-full space-y-1">
                 {loading ?
-                  <div className="flex p-3 justify-center text-primary">
+                  <div className="flex p-3 justify-center font-primary">
                     <LoadingCircle />
                   </div>
                 :
@@ -168,7 +164,7 @@ const SearchBar = () => {
                             );
                           } else {
                             return (
-                              <Link key={post.stream_id} className="text-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" href={"/post/" + post.stream_id}>{post.content.title ? post.content.title : <>{post.content.body.substring(0,25)}...</>}</Link>
+                              <Link key={post.stream_id} className="font-primary font-medium hover:bg-gray-50 cursor-pointer rounded py-1.5 px-2" href={"/post/" + post.stream_id}>{post.content.title ? post.content.title : <>{post.content.body.substring(0,25)}...</>}</Link>
                             );
                           }
 
