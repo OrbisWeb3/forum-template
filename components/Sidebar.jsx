@@ -41,6 +41,7 @@ const RecentDiscussions = () => {
         context: context,
         only_master: true,
         include_child_contexts: include_child_contexts,
+        order_by: 'last_reply_timestamp'
       }, 0, 5);
       setLoading(false);
 
@@ -67,7 +68,7 @@ const RecentDiscussions = () => {
                     <Link className="text-primary font-semibold hover:underline" href={"/post/" + post.stream_id}>{post.content.title}</Link>
                   </h3>
                   <div className="text-xs text-secondary flex flex-row items-center space-x-1">
-                    <ReactTimeAgo date={post.timestamp * 1000} locale="en-US"/> <span className="text-tertiary">by</span> <span><User details={post.creator_details} height={25} /></span>
+                    <span className="text-tertiary">Last activity</span> <span><ReactTimeAgo date={post.last_reply_timestamp ? post.last_reply_timestamp * 1000 : post.timestamp * 1000} locale="en-US"/></span>
                   </div>
                 </li>
               );
