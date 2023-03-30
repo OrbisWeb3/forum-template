@@ -132,6 +132,7 @@ p, ul, li, span, input, button {
 }
 code, code > * {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  white-space: pre-wrap !important;
 }
 .article-content > code, .article-content > p > code, .article-content > ul > li > p > code, .article-content > ul > li > code {
   color: #000;

@@ -33,13 +33,11 @@ export default function Post({ post, post_id }) {
         <Header />
         <main className="grow">
           <section>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-              <div className="pt-6">
-                <div className="md:flex md:justify-between md:divide-x md:divide-slate-200">
-                  {/* Page content*/}
-                  <ArticleContent post={post} />
-                  <Sidebar />
-                </div>
+            <div className="flex max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+              <div className="md:flex md:justify-between md:divide-x md:divide-slate-200">
+                {/* Page content*/}
+                <ArticleContent post={post} />
+                <Sidebar />
               </div>
             </div>
           </section>
