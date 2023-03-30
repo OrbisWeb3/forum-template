@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Badge from "./Badge";
 import { User, UserBadge, useOrbis } from "@orbisclub/components";
 import { shortAddress } from "../utils";
-import { ExternalLinkIcon } from "./Icons";
+import { ExternalLinkIcon, CommentsIcon } from "./Icons";
 
 export default function PostItem({post}) {
   return (
@@ -29,6 +29,16 @@ export default function PostItem({post}) {
                 }
 
                 <span className="hidden md:flex text-secondary mr-2 ml-2">·</span>
+
+                {/** Show count replies if any */}
+                {(post.count_replies && post.count_replies > 0) ?
+                  <>
+                    <Link href={"/post/" + post.stream_id} className="hidden md:flex text-primary px-2 py-1 font-medium text-xs items-center space-y-2 rounded-md border border-transparent hover:bg-white hover:border-gray-200">{post.count_replies} <CommentsIcon style={{marginLeft: 3}} /></Link>
+                    <span className="hidden md:flex text-secondary mr-2 ml-2">·</span>
+                  </>
+                :
+                  <></>
+                }
 
                 {/** Proof link to Cerscan */}
                 {post.stream_id &&
