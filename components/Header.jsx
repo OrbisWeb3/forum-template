@@ -8,6 +8,37 @@ function Header() {
   const { orbis, user, setConnectModalVis } = useOrbis();
   const [showCommunityChat, setShowCommunityChat] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [hasUnreadMessages, setHasUnreadMessages] = useState(false);
+
+  useEffect(() => {
+    getLastTimeRead();
+
+    async function getLastTimeRead() {
+      /** Retrieve last post tiemstamp for this context */
+      let { data, error } = await orbis.getContext(global.orbis_chat_context);
+
+      /** Retrieve last read time for user */
+      let last_read = localStorage.getItem(global.orbis_chat_context + "-last-read");
+      if(last_read) {
+        last_read = parseInt(last_read);
+      } else {
+        last_read = 0;
+      }
+      console.log("last_read:", last_read);
+      console.log("data.last_post_timestamp:", data.last_post_timestamp);
+
+        /** Show unread messages indicator if applicable */
+      if(data && data.last_post_timestamp && (data.last_post_timestamp > last_read)) {
+        setHasUnreadMessages(true);
+      }
+    }
+  }, []);
+
+  /** Open community chat and reset new message indicator */
+  function openCommunityChat() {
+    setShowCommunityChat(true);
+    setHasUnreadMessages(false);
+  }
 
   return (
     <>
@@ -55,8 +86,13 @@ function Header() {
                 }
                 {/** Will open the discussion feed on the right */}
                 <li className="ml-3">
-                  <div className="btn-sm btn-secondary w-full" onClick={() => setShowCommunityChat(true)}>
+                  <div className="relative btn-sm btn-secondary w-full" onClick={() => openCommunityChat()}>
                     Community Chat <PanelRight style={{marginLeft: 5}} />
+
+                    {/** Show unread indicator if any */}
+                    {hasUnreadMessages &&
+                      <div className="bg-red-500 h-2.5 w-2.5 rounded-full" style={{marginLeft: 6}}></div>
+                    }
                   </div>
                 </li>
 

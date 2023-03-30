@@ -40,7 +40,7 @@ const Editor = ({post}) => {
     async function loadContextDetails() {
       setAccessRulesLoading(true);
       setHasAccess(false)
-      let { data, error } = await orbis.api.from("orbis_contexts").select().eq('stream_id', category).single();
+      let { data, error } = await orbis.getContext(category);
       if(data && data.content) {
         /** Save context access rules in state */
         setCategoryAccessRules(data.content.accessRules ? data.content.accessRules : []);
