@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Logo, CommunityIcon, PanelRight, SearchIcon, MenuVerticalIcon, LoadingCircle } from "./Icons";
 import useOutsideClick from "../hooks/useOutsideClick";
-import { useOrbis, User, UserPopup, Chat } from "@orbisclub/components";
+import { useOrbis, User, UserPopup, Chat, Post } from "@orbisclub/components";
+import { getTimestamp } from "../utils";
 
 function Header() {
-  const { orbis, user, setConnectModalVis } = useOrbis();
+  const { orbis, user, connecting, setConnectModalVis } = useOrbis();
   const [showCommunityChat, setShowCommunityChat] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [hasUnreadMessages, setHasUnreadMessages] = useState(false);
@@ -24,10 +25,8 @@ function Header() {
       } else {
         last_read = 0;
       }
-      console.log("last_read:", last_read);
-      console.log("data.last_post_timestamp:", data.last_post_timestamp);
 
-        /** Show unread messages indicator if applicable */
+      /** Show unread messages indicator if applicable */
       if(data && data.last_post_timestamp && (data.last_post_timestamp > last_read)) {
         setHasUnreadMessages(true);
       }
@@ -68,11 +67,16 @@ function Header() {
                 </li>
                 {/** Show connect button or user connected */}
                 {user ?
-                  <li className="relative ml-3 mr-3">
+                  <li className="flex items-center relative ml-1 mr-1">
+
+                    {/** User CTA */}
                     <div className="text-sm font-medium flex flex-row items-center space-x-4 rounded hover:bg-slate-300/[.2] px-3 py-2 cursor-pointer" onClick={() => setShowUserMenu(true)}>
                       <User details={user} height={30} />
                       <MenuVerticalIcon />
                     </div>
+
+                    {/** Notifications icon */}
+                    <BadgeNotifications />
 
                     {/** Showing user menu */}
                     {showUserMenu &&
@@ -81,7 +85,12 @@ function Header() {
                   </li>
                 :
                   <li className="ml-3">
-                    <div className="btn-sm btn-main w-full" onClick={() => setConnectModalVis(true)}>Connect</div>
+                    {connecting ?
+                      <div className="btn-sm btn-main w-full" onClick={() => setConnectModalVis(true)}><LoadingCircle style={{marginRight: 3}} /> Connecting</div>
+                    :
+                      <div className="btn-sm btn-main w-full" onClick={() => setConnectModalVis(true)}>Connect</div>
+                    }
+
                   </li>
                 }
                 {/** Will open the discussion feed on the right */}
@@ -108,6 +117,166 @@ function Header() {
       }
     </>
   );
+}
+
+/** Badhe showing the new notifications count if any */
+const BadgeNotifications = () => {
+  const { orbis, user, setConnectModalVis } = useOrbis();
+  const [countNewNotifs, setCountNewNotifs] = useState();
+  const [showNotifPane, setShowNotifPane] = useState(false);
+
+  /** Will check if user has new notifications for this context */
+  useEffect(() => {
+    loadNotifications();
+    async function loadNotifications() {
+      let { data, status, error } = await orbis.getNotificationsCount({
+        type: "social",
+        context: global.orbis_context,
+        include_child_contexts: true
+      });
+      console.log("res getNotificationsCount:", data);
+      if(error) {
+        console.log("error:", error);
+      }
+      setCountNewNotifs(data.count_new_notifications);
+    }
+  }, []);
+
+  return(
+    <div className="flex flex-row ml-1" onClick={() => setShowNotifPane(true)}>
+      <div className="flex flex-row text-gray-900 text-brand-hover  rounded hover:bg-slate-300/[.2] px-3 py-2 cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.8569 15.0817C14.7514 14.857 16.5783 14.4116 18.3111 13.7719C16.8743 12.177 15.9998 10.0656 15.9998 7.75V7.04919C15.9999 7.03281 16 7.01641 16 7C16 3.68629 13.3137 1 10 1C6.68629 1 4 3.68629 4 7L3.9998 7.75C3.9998 10.0656 3.12527 12.177 1.68848 13.7719C3.4214 14.4116 5.24843 14.857 7.14314 15.0818M12.8569 15.0817C11.92 15.1928 10.9666 15.25 9.9998 15.25C9.03317 15.25 8.07988 15.1929 7.14314 15.0818M12.8569 15.0817C12.9498 15.3711 13 15.6797 13 16C13 17.6569 11.6569 19 10 19C8.34315 19 7 17.6569 7 16C7 15.6797 7.05019 15.3712 7.14314 15.0818" stroke="#0F172A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        {(countNewNotifs > 0) &&
+          <div className="bg-red-500 rounded-full text-white font-bold py-0.5 px-1.5 text-xs" style={{marginLeft: 6}}>{countNewNotifs}</div>
+        }
+      </div>
+
+      {/** Show notifications pane */}
+      {showNotifPane &&
+        <NotificationsPane setCountNewNotifs={setCountNewNotifs} hide={() => setShowNotifPane(false)} />
+      }
+    </div>
+  );
+}
+
+/** Pane with the user's notifications for this context */
+const NotificationsPane = ({setCountNewNotifs, hide}) => {
+  const { orbis } = useOrbis();
+  const wrapperRef = useRef(null);
+  const [notifications, setNotifications] = useState([]);
+  const [notificationsLoading, setNotificationsLoading] = useState(false);
+
+  useEffect(() => {
+    loadNotifications()
+    async function loadNotifications() {
+      setNotificationsLoading(true);
+      let { data, error } = await orbis.getNotifications({
+        type: "social",
+        context: global.orbis_context,
+        include_child_contexts: true
+      });
+      console.log("data getNotifications:", data);
+
+      if(error) {
+        console.log("error getNotifications:", error);
+      }
+
+      if(data) {
+        setNotifications(data);
+      } else {
+        setNotifications([]);
+      }
+
+      setNotificationsLoading(false);
+      setCountNewNotifs(0);
+
+      /** Save new notification's last read timestamp */
+      let _content = {
+        type: "social",
+        context: global.orbis_context,
+        timestamp: parseInt(getTimestamp())
+      };
+      let res = await orbis.setNotificationsReadTime(_content);
+      console.log("res:", res)
+    }
+  }, [])
+
+  /** Is triggered when clicked outside the component */
+  useOutsideClick(wrapperRef, () => hide());
+  return(
+    <div className="absolute top-[0px] right-[0px] py-10 z-50 w-[355px]">
+      <div className="text-sm shadow-md bg-white border border-gray-200 rounded-md flex flex-col w-full divide-y max-h-[600px] overflow-y-scroll" ref={wrapperRef}>
+      {notificationsLoading ?
+        <div className="w-full px-4 py-5 flex justify-center">
+          <LoadingCircle />
+        </div>
+      :
+        <>
+          {notifications.map((notification, key) => {
+            return (
+              <NotificationItem notification={notification} key={key} />
+            );
+          })}
+        </>
+      }
+
+      </div>
+    </div>
+  )
+}
+
+/** Component for the notification item */
+const NotificationItem = ({notification}) => {
+
+  /** Returns a clean name for the notification type */
+  const NotificationFamily = () => {
+    switch (notification.family) {
+      case "reply_to":
+        return <>replied:</>;
+      case "follow":
+        return <>is following you.</>;
+      case "reaction":
+        return <><Reaction />:</>;
+      default:
+        return notification.family;
+    }
+  }
+
+  const Reaction = () => {
+    switch (notification.content?.type) {
+      case "like":
+        return(
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand">
+            <path d="M13.875 4.84375C13.875 3.08334 12.3884 1.65625 10.5547 1.65625C9.18362 1.65625 8.00666 2.45403 7.5 3.59242C6.99334 2.45403 5.81638 1.65625 4.44531 1.65625C2.61155 1.65625 1.125 3.08334 1.125 4.84375C1.125 9.95831 7.5 13.3438 7.5 13.3438C7.5 13.3438 13.875 9.95831 13.875 4.84375Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        )
+      case "haha":
+        return <span>HAHA!</span>
+      default:
+
+    }
+  }
+
+  return(
+    <div className={`w-full flex flex-col p-3 ${notification.status == "new" ? "bg-slate-100" : "bg-white" }`}>
+      <div className="flex flex-row items-center space-x-2 flex-wrap">
+        <User height={35} details={notification.user_notifiying_details} />
+        <span className="flex text-sm items-center"><NotificationFamily /></span>
+      </div>
+      {(notification.family == "reply_to" || notification.family == "reaction") &&
+        <div className={`border border-slate-200 p-2 rounded-md shadow-md mt-1.5 ${notification.status == "new" ? "bg-white" : "bg-gray-50" }`}>
+          {(notification.post_details && notification.post_details.content && notification.post_details.content.body) ?
+            <Post post={notification.post_details} showPfp={false} showCta={false} />
+          :
+            <div><p className="text-italic">Post deleted...</p></div>
+          }
+        </div>
+      }
+
+    </div>
+  )
 }
 
 /** User menu with update profile and logout buttons */
@@ -169,7 +338,7 @@ const SearchBar = () => {
       if(error) {
         console.log("error:", error);
       }
-      console.log("data:", data);
+
       setPosts(data);
       setLoading(false);
     }
@@ -245,8 +414,8 @@ const ChatPanel = ({hide}) => {
                     <div className="ml-3 flex h-7 items-center">
                       <button type="button" className="rounded-md bg-transparent text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white" onClick={() => hide()}>
                         <span className="sr-only">Close panel</span>
-                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
                     </div>
