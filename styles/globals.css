@@ -28,10 +28,8 @@ body {
   --tw-gradient-to: rgb(254 246 235 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
   --tw-gradient-to: #FFF;*/
-  font-family: "Inter";
 }
 p, ul, li, span, input, button {
-  font-family: "Inter";
 }
 
 .bg-blur {

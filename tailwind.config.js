@@ -10,9 +10,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        inter: ['Inter', 'sans-serif']
-      },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1.5' }],
         sm: ['0.875rem', { lineHeight: '1.5715' }],
@@ -39,5 +36,6 @@ module.exports = {
   plugins: [
     // eslint-disable-next-line global-require
     require('@tailwindcss/forms'),
+    require('@tailwindcss/typography')
   ],
 }
