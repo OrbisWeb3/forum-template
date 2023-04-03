@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Logo, CommunityIcon, PanelRight, SearchIcon, MenuVerticalIcon, LoadingCircle } from "./Icons";
+import { Logo, PanelRight, SearchIcon, MenuVerticalIcon, LoadingCircle } from "./Icons";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { useOrbis, User, UserPopup, Chat, Post } from "@orbisclub/components";
 import { getTimestamp } from "../utils";
@@ -15,7 +15,7 @@ function Header() {
     getLastTimeRead();
 
     async function getLastTimeRead() {
-      /** Retrieve last post tiemstamp for this context */
+      /** Retrieve last post timestamp for this context */
       let { data, error } = await orbis.getContext(global.orbis_chat_context);
 
       /** Retrieve last read time for user */
@@ -121,26 +121,28 @@ function Header() {
 
 /** Badhe showing the new notifications count if any */
 const BadgeNotifications = () => {
-  const { orbis, user, setConnectModalVis } = useOrbis();
+  const { orbis } = useOrbis();
   const [countNewNotifs, setCountNewNotifs] = useState();
   const [showNotifPane, setShowNotifPane] = useState(false);
 
   /** Will check if user has new notifications for this context */
   useEffect(() => {
-    loadNotifications();
-    async function loadNotifications() {
-      let { data, status, error } = await orbis.getNotificationsCount({
+    const interval = setInterval(loadNotifications, 5000); // run loadNotifications every 5 seconds
+    return () => clearInterval(interval); // cleanup function to stop the interval when the component unmounts
+  }, []);
+  
+  async function loadNotifications() {
+    try {
+      const { data } = await orbis.getNotificationsCount({
         type: "social",
         context: global.orbis_context,
         include_child_contexts: true
       });
-      console.log("res getNotificationsCount:", data);
-      if(error) {
-        console.log("error:", error);
-      }
       setCountNewNotifs(data.count_new_notifications);
+    } catch (error) {
+      console.log("Error loading notifications:", error);
     }
-  }, []);
+  }
 
   return(
     <div className="flex flex-row ml-1" onClick={() => setShowNotifPane(true)}>
@@ -285,7 +287,7 @@ const NotificationItem = ({notification}) => {
 
 /** User menu with update profile and logout buttons */
 const UserMenuVertical = ({hide}) => {
-  const { orbis, user, setUser, setConnectModalVis } = useOrbis();
+  const { orbis, user, setUser } = useOrbis();
   const [showUserPopup, setShowUserPopup] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -320,7 +322,7 @@ const UserMenuVertical = ({hide}) => {
 
 /** Search form */
 const SearchBar = () => {
-  const { orbis, user, setConnectModalVis } = useOrbis();
+  const { orbis } = useOrbis();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
