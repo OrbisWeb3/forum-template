@@ -177,7 +177,6 @@ const NotificationsPane = ({setCountNewNotifs, hide}) => {
         context: global.orbis_context,
         include_child_contexts: true
       });
-      console.log("data getNotifications:", data);
 
       if(error) {
         console.log("error getNotifications:", error);
@@ -208,20 +207,25 @@ const NotificationsPane = ({setCountNewNotifs, hide}) => {
   return(
     <div className="absolute top-[0px] right-[0px] py-10 z-50 w-[355px]">
       <div className="text-sm shadow-md bg-white border border-gray-200 rounded-md flex flex-col w-full divide-y max-h-[600px] overflow-y-scroll" ref={wrapperRef}>
-      {notificationsLoading ?
-        <div className="w-full px-4 py-5 flex justify-center">
-          <LoadingCircle />
-        </div>
-      :
-        <>
-          {notifications.map((notification, key) => {
-            return (
-              <NotificationItem notification={notification} key={key} />
-            );
-          })}
-        </>
-      }
-
+        {notificationsLoading ?
+          <div className="w-full px-4 py-5 flex justify-center">
+            <LoadingCircle />
+          </div>
+        :
+          <>
+            {notifications.length > 0 ?
+              <>
+                {notifications.map((notification, key) => {
+                  return (
+                    <NotificationItem notification={notification} key={key} />
+                  );
+                })}
+              </>
+            :
+              <p className=" p-4 text-gray-600 text-sm">You don't have any notifications here.</p>
+            }
+          </>
+        }
       </div>
     </div>
   )
