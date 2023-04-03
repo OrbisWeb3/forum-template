@@ -222,7 +222,7 @@ const NotificationsPane = ({setCountNewNotifs, hide}) => {
                 })}
               </>
             :
-              <p className=" p-4 text-gray-600 text-sm">You don't have any notifications here.</p>
+              <p className=" p-4 text-gray-600 text-sm">You don&apos;t have any notifications here.</p>
             }
           </>
         }
